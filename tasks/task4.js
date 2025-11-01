@@ -2,8 +2,16 @@
 // Завдання — перевірити, чи всі машини в масиві мають витрату палива менше 6 л/100 км. 
 // Якщо це так, то фільтруємо машини по бренду і повертаємо ті, що найбільш економні.
 
+// Маємо масив об'єктів, де кожен об'єкт представляє автомобіль з інформацією про її бренд, модель і витрату палива.
+// Завдання — відфільтрувати машини, які належать до вказаного бренду І мають витрату палива менше 6 л/100 км.
+
 function getMostFuelEfficientCars(cars, brand) {
-  // Ваш код
+  const allEfficient = cars.every(car => car.fuelConsumption < 6);
+  if (!allEfficient) {
+    return [];
+  }
+  const filteredByBrand = cars.filter(car => car.brand === brand);
+  return filteredByBrand.sort((a, b) => a.fuelConsumption - b.fuelConsumption);
 }
 
 // Приклад використання:
@@ -13,19 +21,16 @@ const cars = [
   { brand: 'Toyota', model: 'Camry', fuelConsumption: 5.5 },
   { brand: 'Ford', model: 'Focus', fuelConsumption: 6.1 },
   { brand: 'Honda', model: 'Accord', fuelConsumption: 5.8 },
-  { brand: 'Audi', model: 'A3', fuelConsumption: 5.4 },  
-  { brand: 'Audi', model: 'Q5', fuelConsumption: 5.7 },  
-  { brand: 'Dodge', model: 'Charger', fuelConsumption: 5.8 }, 
-  { brand: 'Dodge', model: 'Durango', fuelConsumption: 5.6 }, 
+  { brand: 'Audi', model: 'A3', fuelConsumption: 5.4 },
+  { brand: 'Audi', model: 'Q5', fuelConsumption: 5.7 },
+  { brand: 'Dodge', model: 'Charger', fuelConsumption: 5.8 },
+  { brand: 'Dodge', model: 'Durango', fuelConsumption: 5.6 },
 ];
 
 console.log(getMostFuelEfficientCars(cars, 'Toyota')); 
-
 console.log(getMostFuelEfficientCars(cars, 'Honda')); 
+console.log(getMostFuelEfficientCars(cars, 'Audi')); 
+console.log(getMostFuelEfficientCars(cars, 'Dodge')); 
+console.log(getMostFuelEfficientCars(cars, 'Ford')); 
 
-console.log(getMostFuelEfficientCars(cars, 'Audi'));  
-
-console.log(getMostFuelEfficientCars(cars, 'Dodge'));  
-
-console.log(getMostFuelEfficientCars(cars, 'Ford'));  
 module.exports = getMostFuelEfficientCars;
